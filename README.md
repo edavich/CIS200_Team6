@@ -1,1 +1,2 @@
-# CIS200_Team6
+# Movie Theater Application
+
