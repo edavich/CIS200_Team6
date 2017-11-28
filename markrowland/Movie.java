@@ -16,6 +16,18 @@ public class Movie {
 		
 	}
 	
+	public Movie(Movie m)
+	{
+		name = m.name;
+		summary = m.summary;
+		stars = m.stars;
+		genres = m.genres;
+		releaseDate = m.releaseDate;
+		rating = m.rating;
+		runTime = m.runTime;
+		score = m.score;
+	}
+	
 	public Movie(String n, String su, String [] st, String [] g, String rd, String ra, String rt, double sc)
 	{
 		name = n;
@@ -66,5 +78,28 @@ public class Movie {
 	public double getScore()
 	{
 		return score;
+	}
+	
+	public String toString()
+	{
+		String star = "";
+		for(int i = 0; i < stars.length; i++)
+			star= star + stars[i] + ", ";
+		String genre = "";
+		for(int i = 0; i < genres.length; i++)
+			genre = genre + genres[i] + ", ";
+		return "Name: " + name +
+				"\nSummary: " + summary+
+				"\nStars: " + star +
+				"\nGenres: " + genre +
+				"\nReleaseDate: " + releaseDate+
+				"\nRating: " + rating+
+				"\nRunTime: " + runTime+
+				"\nScore: " + score;
+	}
+	
+	public Movie Clone()
+	{
+		return new Movie(name, summary, stars, genres, releaseDate, rating, runTime, score);
 	}
 }
