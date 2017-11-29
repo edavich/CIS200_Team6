@@ -9,7 +9,7 @@ public class Test {
 		
 		
 		movieList list = new movieList();
-		/*
+		
 		String done = "";
 		while(!done.equals("y"))
 		{
@@ -22,7 +22,7 @@ public class Test {
 			done = s.nextLine();
 		}
 		
-		*/
+		
 		
 		ArrayList<Movie> movies = list.getMovieList();
 		/*
@@ -50,7 +50,9 @@ public class Test {
 		}
 		*/
 		String [] stars = {"Drama"};
-		ArrayList<Movie> temp = list.search(null, null, null, null, null, null, 9.0);
+		
+		ArrayList<Movie> temp = list.sortByScore();
+				//list.search(null, null, null, "1 April 2017", null, null, -1);
 		for(int i = 0; i < temp.size(); i++)
 		{
 			System.out.println(temp.get(i).toString());

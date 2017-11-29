@@ -67,9 +67,21 @@ public class movieList {
 
 		String [] stars = x.substring(7, x.indexOf(" |")).split(", ");
 		
-		double score = Double.parseDouble(doc.select("#title-overview-widget > div.vital > div.title_block > div > div.ratings_wrapper > div.imdbRating > div.ratingValue > strong > span").text());
+		x = doc.select("#title-overview-widget > div.vital > div.title_block > div > div.ratings_wrapper > div.imdbRating > div.ratingValue > strong > span").text();
+		double score = 0;
+		if(!x.equals(""))
+		{
+			score = Double.parseDouble(x);
+		}
 		
 		Movie temp = new Movie(name, plotSummary, stars, genres, releaseDate, rating, runTime, score);
+		movies.add(temp);
+		appendFile(temp);
+	}
+	
+	public void addMovie(String n, String p, String [] st, String [] g, String r, String ra, String ru, double s) throws IOException
+	{
+		Movie temp = new Movie(n, p, st, g, r, ra, ru, s);
 		movies.add(temp);
 		appendFile(temp);
 	}
@@ -307,49 +319,97 @@ public class movieList {
 	private int parseReleaseDate(String s)
 	{
 		String [] str = s.split(" ");
-		switch(str[1])
+		String date = "";
+		if(Character.isDigit(str[0].charAt(0)))
 		{
-		case "January":
-			str[1] = "01";
-			break;
-		case "February":
-			str[1] = "02";
-			break;
-		case "March":
-			str[1] = "03";
-			break;
-		case "April":
-			str[1] = "04";
-			break;
-		case "May":
-			str[1] = "05";
-			break;
-		case "June":
-			str[1] = "06";
-			break;
-		case "July":
-			str[1] = "07";
-			break;
-		case "August":
-			str[1] = "08";
-			break;
-		case "September":
-			str[1] = "09";
-			break;
-		case "October":
-			str[1] = "10";
-			break;
-		case "November":
-			str[1] = "11";
-			break;
-		case "December":
-			str[1] = "12";
-			break;
+			switch(str[1])
+			{
+			case "January":
+				str[1] = "01";
+				break;
+			case "February":
+				str[1] = "02";
+				break;
+			case "March":
+				str[1] = "03";
+				break;
+			case "April":
+				str[1] = "04";
+				break;
+			case "May":
+				str[1] = "05";
+				break;
+			case "June":
+				str[1] = "06";
+				break;
+			case "July":
+				str[1] = "07";
+				break;
+			case "August":
+				str[1] = "08";
+				break;
+			case "September":
+				str[1] = "09";
+				break;
+			case "October":
+				str[1] = "10";
+				break;
+			case "November":
+				str[1] = "11";
+				break;
+			case "December":
+				str[1] = "12";
+				break;
+			}
+			if(Integer.parseInt(str[0]) < 10)
+				str[0] = "0" + str[0];
+			date = str[2] + str[1] + str[0];
 		}
-		if(Integer.parseInt(str[0]) < 10)
-			str[0] = "0" + str[0];
 		
-		String date = str[2] + str[1] + str[0];
+		else
+		{
+			switch(str[0])
+			{
+			case "January":
+				str[0] = "01";
+				break;
+			case "February":
+				str[0] = "02";
+				break;
+			case "March":
+				str[0] = "03";
+				break;
+			case "April":
+				str[0] = "04";
+				break;
+			case "May":
+				str[0] = "05";
+				break;
+			case "June":
+				str[0] = "06";
+				break;
+			case "July":
+				str[0] = "07";
+				break;
+			case "August":
+				str[0] = "08";
+				break;
+			case "September":
+				str[0] = "09";
+				break;
+			case "October":
+				str[0] = "10";
+				break;
+			case "November":
+				str[0] = "11";
+				break;
+			case "December":
+				str[0] = "12";
+				break;
+			}
+			date = str[1] + str[0] + "00";
+		}
+		
 		return Integer.parseInt(date);
 	}
 
